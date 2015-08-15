@@ -17,13 +17,13 @@ struct PRECONFIG
 
 struct FILECONFIG
 {
-
-	GLfloat fovy;
+	// Configurações de perspectiva
+	GLfloat fOvy;
 	GLfloat fAspect;
 	GLfloat zNear;
 	GLfloat zFar;
-
 	GLfloat angulo_Rot_Perspec;
+	//
 
 	GLdouble  	pos_Olho_X;
 	GLdouble  	pos_Olho_Y;
@@ -35,9 +35,9 @@ struct FILECONFIG
 	GLdouble  	upY;
 	GLdouble  	upZ;
 
-	GLdouble  	eye;
-	GLdouble  	center;
-	GLdouble  	up;
+	GLdouble  	pos_Olho_Global;
+	GLdouble  	pos_Centro_Global;
+	GLdouble  	pos_Top_Global;
 
 
 	GLdouble  	rotX;
@@ -47,9 +47,8 @@ struct FILECONFIG
 }fileConfig;
 
 void carregaArquivo(void);
-void desenha(void);
-void criaTela(void);
-
+void inicializa(void);
+void alteraTamJanela(void);
 
  int carregaArquivo(int fSizeX,int fSizeY, int fSizeZ, int cabSize) 
 {
@@ -104,4 +103,47 @@ void criaTela(void);
 	free(vol);
 
  
+ }
+
+ void inicializa(void)
+ {
+ // Especifica sistema de coordenadas de projeção
+	glMatrixMode(GL_PROJECTION);
+	// Inicializa sistema de coordenadas de projeção
+	glLoadIdentity();
+
+	// Especifica a projeção perspectiva(angulo,aspecto,zMin,zMax)
+	gluPerspective(fileConfig.angulo_Rot_Perspec, fileConfig.fAspect,fileConfig.zNear,fileConfig.zFar);
+
+	// Rotaciona o objeto nos valores especificados
+	glRotatef(fileConfig.angulo_Rot_Perspec,fileConfig.rotX,fileConfig.rotY,fileConfig.rotZ);
+
+	// Especifica sistema de coordenadas do modelo
+	glMatrixMode(GL_MODELVIEW);
+	// Inicializa sistema de coordenadas do modelo
+	glLoadIdentity();
+
+	// Especifica posição do observador e do alvo
+	gluLookAt(fileConfig.pos_Olho_X, fileConfig.pos_Olho_Y, fileConfig.pos_Olho_Z, fileConfig.pos_Centro_Tela_X, fileConfig.pos_Centro_Tela_Y, fileConfig.pos_Centro_Tela_Z, fileConfig.upX, fileConfig.upY,fileConfig.upZ);
+	
+
+ 
+ }
+
+ // Suporte a alteração no tamanho da janela
+ void alteraTamJanela(GLsizei width, GLsizei height)
+ {
+	 // Para previnir uma divisão por zero
+	 if (height == 0) {
+		 height = 1;
+	 }
+
+	 // Especifica as dimensões da viewport
+	 glViewport(0, 0, width, height);
+
+	 // Calcula a correção de aspecto
+	 fileConfig.fAspect = (GLfloat)width / (GLfloat)height;
+
+	 // Atualiza os parâmetros de inicialização
+	 inicializa();
  }

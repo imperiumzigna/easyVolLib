@@ -1,29 +1,41 @@
 ========================================================================
-    STATIC LIBRARY : easyvolLib Project Overview
+    easyVolLib.h ------ Versão 0.0.2
 ========================================================================
 
-AppWizard has created this easyvolLib library project for you.
+Descrição:
 
+Igor Amorim Silva - Desenvolveu a biblioteca easyvolLib para facilitar 
+					a visualização de arquivos volumétricos em OpenGL.
+========================================================================
+Função:
+ 
+ carregaArquivo - aloca memória e prepara o arquivo para ser visualizado na tela.
 
+Requisitos: { preConfig, visualConfig}			
 
+---------------------------------------------------------------------
+ 
+ inicializa - prepara as rotinas de inicialização do OpenGL
+ 
+ Requisitos: {visualConfig}
+ 
+---------------------------------------------------------------------
 
-easyvolLib.vcxproj
-    This is the main project file for VC++ projects generated using an Application Wizard.
-    It contains information about the version of Visual C++ that generated the file, and
-    information about the platforms, configurations, and project features selected with the
-    Application Wizard.
+ alteraTamJanela - atualiza a janela após ser redimensionada
+ 
+ Requisitos: {nenhum}
 
-easyvolLib.vcxproj.filters
-    This is the filters file for VC++ projects generated using an Application Wizard. 
-    It contains information about the association between the files in your project 
-    and the filters. This association is used in the IDE to show grouping of files with
-    similar extensions under a specific node (for e.g. ".cpp" files are associated with the
-    "Source Files" filter).
+---------------------------------------------------------------------
+
+ mouse - implementação de controlador de mouse pronto para ser aplicado
+		 adicionando Zoom a imagem
+ 
+ Requisitos: {nenhum}
 
 /////////////////////////////////////////////////////////////////////////////
-Other notes:
+Notas:
 
-AppWizard uses "TODO:" comments to indicate parts of the source code you
-should add to or customize.
+Atualmente a biblioteca apenas funciona para arquivos que possuem cabeçalho
+com valor acima de 1. Em versões futuras isso será tratado.
 
 /////////////////////////////////////////////////////////////////////////////

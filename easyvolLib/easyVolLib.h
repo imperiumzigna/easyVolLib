@@ -9,7 +9,7 @@ Licença: GLP 2.0
 #pragma once
 #ifndef _CRT_SECURE_NO_WARNINGS
 # define _CRT_SECURE_NO_WARNINGS
-#include <GL\glut.h> // a remover 
+#include <GL\glut.h>
 #include <GL\GLU.h> //
 #endif
 #include <stdio.h>
